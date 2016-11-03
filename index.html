@@ -249,6 +249,8 @@
             annotator.image.wigth  = 350;
             if (image_num == 1){
                 document.getElementById('prev-button').setAttribute('disabled', 'disabled');
+            } else if (image_num == 9) {
+                document.getElementById('next-button').removeAttribute('disabled', 'disabled');
             }
       });
     }
