@@ -9,8 +9,6 @@ A Javascript widget to draw a graph on an image.
  * Vanilla Javascript implementation.
  * HTML5 canvas is required to use.
 
-There is an [online demo](http://kyamagu.github.io/js-graph-annotator/).
-
 Here is a quick usage example.
 
     new GraphAnnotator('/path/to/image.jpg', {
