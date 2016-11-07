@@ -109,12 +109,14 @@ GraphAnnotator = function(imageURL, options) {
 //     annotator.setNodeAttributes({color: [255, 255, 0]});
 //     annotator.setNodeAttributes(2, {color: [255, 255, 0]});
 //
-// There are three attributes.
+// There are four attributes.
 //
 // * `color` - RGB values in a 3-element integer array.
 // * `lineWidth` - Width of the line.
 // * `diameter` - Diameter of the node.
+// * `visible` - Visibility of the node
 //
+
 GraphAnnotator.prototype.setNodeAttributes = function(index, attributes) {
   var start = 0,
       end = this.graph.nodes.length;
@@ -222,12 +224,12 @@ GraphAnnotator.prototype._initializeEvents = function(options) {
       currentNode = null;
   this.canvas.addEventListener('mousedown', function(event) {
     if (mousestatus === false) {
-      mousestatus = true;
-      currentNode = _this._findNode(_this._getPosition(event));
-      _this._updateNode(event, currentNode);
-      if (options.onselect && currentNode !== null)
-        options.onselect.call(_this, currentNode);
-      document.onselectstart = function() { return false; };
+        mousestatus = true;
+        currentNode = _this._findNode(_this._getPosition(event));
+        _this._updateNode(event, currentNode);
+        if (options.onselect && currentNode !== null)
+            options.onselect.call(_this, currentNode);
+        document.onselectstart = function() { return false; };
     }
   });
   this.canvas.addEventListener('mousemove', function(event) {
@@ -239,7 +241,7 @@ GraphAnnotator.prototype._initializeEvents = function(options) {
       _this._updateNode(event, currentNode);
       mousestatus = false;
       document.onselectstart = function() { return true; };
-      options.onchange.call(_this, currentNode);
+      options.onchange.call(_this, currentNode, event.which);
       currentNode = null;
     }
   });
@@ -304,6 +306,7 @@ GraphAnnotator.prototype._renderGraph = function() {
     context.closePath();
     context.stroke();
   }
+
   for (i = 0; i < this.graph.nodes.length; ++i) {
     var node = this.graph.nodes[i];
     if (node.position) {
