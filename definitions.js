@@ -1,20 +1,21 @@
+
 /* Pose node definitions */
 var nodes = [
-    {name: 'head'},
-    {name: 'neck'},
-    {name: 'right shoulder'},
-    {name: 'right elbow'},
-    {name: 'right hand'},
-    {name: 'left shoulder'},
-    {name: 'left elbow'},
-    {name: 'left hand'},
-    {name: 'right hip'},
-    {name: 'left hip'},
-    {name: 'right knee'},
-    {name: 'left knee'},
-    {name: 'right ankle'},
-    {name: 'left ankle'}
-];
+             {name: 'head'},
+             {name: 'neck'},
+             {name: 'right shoulder'},
+             {name: 'right elbow'},
+             {name: 'right hand'},
+             {name: 'left shoulder'},
+             {name: 'left elbow'},
+             {name: 'left hand'},
+             {name: 'right hip'},
+             {name: 'left hip'},
+             {name: 'right knee'},
+             {name: 'left knee'},
+             {name: 'right ankle'},
+             {name: 'left ankle'}
+             ];
 
 /* Pose edge definitions */
 var edges = [
@@ -69,3 +70,79 @@ var example2_nodes = [
     {position: [ 62, 300]},
     {position: [ 35, 300]}
 ];
+
+// Create an example.
+createExample = function(document, imageURL, example_nodes, type)
+{
+    return new GraphAnnotator(imageURL, {
+        container: document.getElementById('example-' + type),
+        graph: { nodes: example_nodes, edges: edges },
+        nodeColor: [255, 255, 255],
+        onload: function() {
+            // Highlight the first node.
+            this.setNodeAttributes(0, {color: [255, 0, 0], diameter:5});
+        }
+    });
+}
+
+deepCopy = function(object)
+{
+    return JSON.parse(JSON.stringify(object));
+}
+
+/* int to '%Td' */
+pad = function(num, T)
+{
+    return (num < T) ? '0' + pad(num, T/10) : num.toString();
+}
+
+var graph_array = Array();
+var graph = {};
+
+creatAnnotator = function(document, image_num, example1, example2)
+{
+    if (graph_array.length == image_num-1){
+        graph = { image: 'data/im'+pad(image_num, 1000)+'.jpg', nodes: nodes, edges: edges };
+    } else {
+        graph = graph_array[image_num-1];
+    }
+    var annotator = new GraphAnnotator(graph.image, {
+        container: document.getElementById('annotator'),
+        graph: graph,
+                              
+        onload: function() {
+            document.getElementById('message').innerHTML = '&lt;&lt; Click ' + nodes[0].name.substr(0, 1).toUpperCase() + nodes[0].name.substr(1);
+        },
+                                
+        onselect: function(current_node) {
+            // Highlight the current node.
+            example1.setNodeAttributes({color: null, diameter: 3});
+            example2.setNodeAttributes({color: null, diameter: 3});
+            this.setNodeAttributes(current_node, {color: [255, 0, 0], diameter: 5});
+            example1.setNodeAttributes(current_node, {color: [255, 0, 0], diameter: 5});
+            example2.setNodeAttributes(current_node, {color: [255, 0, 0], diameter: 5});
+        },
+                                
+        onchange: function(current_node, which) {
+            // Reset the node style.
+            this.setNodeAttributes(current_node, {visibility: nodeVisibility(which), color: nodeColor(which), diameter: 3});
+            example1.setNodeAttributes(current_node, {color: null, diameter: 3});
+            example2.setNodeAttributes(current_node, {color: null, diameter: 3});
+            var nextNode = this.getNextNode();
+            if (nextNode === null) {
+                // Finished.
+                document.getElementById('message').innerHTML = 'Finished';
+                //document.getElementById('download-button').removeAttribute('disabled');
+            } else {
+                // Highlight the next node.
+                document.getElementById('message').innerHTML = '&lt;&lt; Click ' + nodes[nextNode].name.substr(0, 1).toUpperCase() + nodes[nextNode].name.substr(1);
+                example1.setNodeAttributes(nextNode, {color: [255, 0, 0], diameter: 5});
+                example2.setNodeAttributes(nextNode, {color: [255, 0, 0], diameter: 5});
+            }
+            graph = this.getGraph();
+        }
+    });
+    annotator.image.height = 500;
+    annotator.image.wigth  = 220;
+    return annotator;
+}
