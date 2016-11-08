@@ -93,6 +93,13 @@
         } else {
             graph_array[image_num-1] = deepCopy(graph);
         }
+        for (var i = 0; i < graph_array.length; i++){
+            delete graph_array[i].edges;
+            for (var j = 0; j < graph_array[i].nodes.length; j++){
+                delete graph_array[i].nodes[j]['color'];
+                delete graph_array[i].nodes[j]['diameter'];
+            }
+        }
         var dataURL = 'data:application/json;charset=utf-8,' +
                       encodeURIComponent(JSON.stringify(graph_array));
                            
