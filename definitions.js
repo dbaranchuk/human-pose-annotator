@@ -97,6 +97,7 @@ pad = function(num, T)
 }
 
 var graph_array = Array();
+var scale_array = Array();
 var graph = {};
 
 creatAnnotator = function(document, image_num, example1, example2)
@@ -142,7 +143,34 @@ creatAnnotator = function(document, image_num, example1, example2)
             graph = this.getGraph();
         }
     });
+    scale_array.push(annotator.image.height/500);
     annotator.image.height = 500;
-    annotator.image.wigth  = 220;
     return annotator;
+}
+
+/* Convert graph to the final annotation object */
+toResult = function(graph_array)
+{
+    result_array = Array();
+    
+    for (var i = 0; i < graph_array.length; i++){
+        var new_nodes = [];
+        for (var j = 0; j < graph_array[i].nodes.length; j++){
+            var vis = graph_array[i].nodes[j]['visibility'];
+            var coords = graph_array[i].nodes[j]['position'];
+            var new_node = {};
+            if (typeof(coords) !== 'undefined'){
+                coords[0] = Math.floor(coords[0] * scale_array[i]);
+                coords[1] = Math.floor(coords[1] * scale_array[i]);
+                new_node[graph_array[i].nodes[j]['name']] = [coords[0], coords[1], vis];
+            } else {
+                new_node[graph_array[i].nodes[j]['name']] = [];
+            }
+            new_nodes.push(new_node);
+        }
+        new_obj = {};
+        new_obj[graph_array[i].image] = new_nodes;
+        result_array.push(new_obj);
+    }
+    return result_array;
 }
