@@ -93,9 +93,8 @@
         } else {
             graph_array[image_num-1] = deepCopy(graph);
         }
-        result_array = toResult(graph_array);
         var dataURL = 'data:application/json;charset=utf-8,' +
-                      encodeURIComponent(JSON.stringify(result_array));
+                      encodeURIComponent(JSON.stringify(toResult(graph_array)));
                            
         anchor.setAttribute('download', 'graph.json');
         anchor.setAttribute('href', dataURL);
