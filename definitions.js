@@ -143,7 +143,7 @@ creatAnnotator = function(document, image_num, example1, example2)
             graph = this.getGraph();
         }
     });
-    scale_array.push(annotator.image.height/500);
+    scale_array.push(annotator.image.height/500.);
     annotator.image.height = 500;
     return annotator;
 }
