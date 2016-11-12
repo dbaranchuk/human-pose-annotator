@@ -1,10 +1,15 @@
 <html>
 <head>
-  <script type="text/javascript" src="graph-annotator.js"></script>
-  <script type="text/javascript" src="definitions.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="static/js/graph-annotator.js"></script>
+  <script type="text/javascript" src="static/js/definitions.js"></script>
   <style type="text/css">
     body {
       font-family: Verdana, Arial, sans-serif;
+      height: 100%;
+      width: 100%;
+      background: url("static/images/background.jpg");
+      background-size: cover;
     }
     .inline-block {
       display: inline-block;
@@ -12,12 +17,12 @@
       white-space: normal;
     }
    .button {
-      background-color: #008080;
+      background-color: #4682B4;
       border: none;
       color: white;
       padding: 8px 17px;
       font-size: 18px;
-      margin: 0px 5px;
+      margin: 0px 4px;
       cursor: pointer;
     }
     .button:disabled {
@@ -25,14 +30,18 @@
       cursor: not-allowed;
     }
     #message {
-        font-size: 18;
-        color: black;
+        font-size: 20;
+        color: #4682B0;
         text-align: left;
         font-weight: bold;
     }
+    h1 {
+        font-size: 36;
+        color: #4682B0;
+    }
     p {
         font-size: 18;
-        color: black;
+        color: #4682B0;
         text-align: center;
         font-weight: bold;
     }
@@ -40,25 +49,25 @@
 </head>
 <body>
   <div style="white-space:nowrap;">
-    <div id="annotator" style="margin:20 1.5em;"></div>
-    <div class="inline-block" style="margin:0 1em;">
-      <h2>Human Pose Annotator</h2>
+    <div id="annotator" style="margin:25 2.0em;"></div>
+    <div class="inline-block">
+      <h1>Human Pose Annotator</h1>
       <p id="message" class="message"></p>
       <div style="white-space:nowrap;">
-        <div class="inline-block" style="margin:0 1.5em;">
-          <p>Front</p>
+        <div class="inline-block" style="margin:5 4.5em;">
+          <!--<p>Front</p>-->
           <div id="example-front"></div>
         </div>
-        <div class="inline-block">
-          <p>Back</p>
+        <div class="inline-block" style="margin:5 1.5em;">
+          <!--<p>Back</p>-->
           <div id="example-back"></div>
         </div>
       </div>
       <p>
         <button id="clear-button" class="button">Clear</button>
-        <button id="prev-button" class="button" disabled="disabled" style="margin:0 5px;">Prev</button>
+        <button id="prev-button" class="button" disabled="disabled" style="margin:0 20px;">Prev</button>
         <button id="next-button" class="button">Next</button>
-        <button id="download-button" class="button" style="margin:0 5px;">Export</button>
+        <button id="download-button" class="button" style="margin:0 20px;">Export</button>
       </p>
     </div>
   </div>
@@ -68,33 +77,32 @@
     nodeVisibility = function(which) { return (which == 1) ? 1 : 0;}
     
     window.onload = function() {
-      example1 = createExample(document, 'tshirt_front.png', example1_nodes, 'front');
-      example2 = createExample(document, 'tshirt_back.png', example2_nodes, 'back');
+      example1 = createExample(document, "static/images/tshirt_front.png", example1_nodes, 'front');
+      example2 = createExample(document, "static/images/tshirt_back.png", example2_nodes, 'back');
       
       // Create a main annotation.
       var annotator = creatAnnotator(document, ++image_num, example1, example2);
       
-      /* Set up the Clear button */
+      /* Set up the Clear Button */
       document.getElementById('clear-button').addEventListener('click', function(event) {
         annotator.setNodeAttributes({position: undefined});
         example1.setNodeAttributes({color: null, diameter: 3});
         example2.setNodeAttributes({color: null, diameter: 3});
         example1.setNodeAttributes(0, {color: [255, 0, 0], diameter:5});
         example2.setNodeAttributes(0, {color: [255, 0, 0], diameter:5});
-        //document.getElementById('download-button').setAttribute('disabled', 'disabled');
-        document.getElementById('message').innerHTML = '&lt;&lt; Click ' + nodes[0].name.substr(0, 1).toUpperCase() + nodes[0].name.substr(1);
+        document.getElementById('message').innerHTML = '&lt;&lt; Click ' + nodes[0].name;
       });
       
-      /* Set up the Export button */
-      document.getElementById('download-button').addEventListener('click', function(event) {
+      /* Set up the Export Button */
+      document.getElementById('download-button').addEventListener('click', function(event){
         var anchor = document.createElement('a');
-        if (graph_array.length == image_num-1){
-            graph_array.push(deepCopy(graph));
+        if (graphs.length == image_num-1){
+            graphs.push(deepCopy(graph));
         } else {
-            graph_array[image_num-1] = deepCopy(graph);
+            graphs[image_num-1] = deepCopy(graph);
         }
         var dataURL = 'data:application/json;charset=utf-8,' +
-                      encodeURIComponent(JSON.stringify(toResult(graph_array)));
+                      encodeURIComponent(JSON.stringify(toResult(graphs)));
                            
         anchor.setAttribute('download', 'graph.json');
         anchor.setAttribute('href', dataURL);
@@ -104,18 +112,22 @@
         document.body.removeChild(anchor);
       });
       
-      /* TODO если finished то поменятьв табло число сделанных разметок */
-      /* Set up the Next button */
+      /* Set up the Next Button */
       document.getElementById('next-button').addEventListener('click', function(event) {
-        if (graph_array.length == image_num-1){
-            graph_array.push(deepCopy(graph));
+        /* Save Graph */
+        if (graphs.length == image_num-1){
+            graphs.push(deepCopy(graph));
         } else {
-            graph_array[image_num-1] = deepCopy(graph);
+            graphs[image_num-1] = deepCopy(graph);
         }
-        document.getElementById('clear-button').click();
-        
+        /* Clear Graph */
+        annotator.setNodeAttributes({position: undefined});
+        example1.setNodeAttributes({color: null, diameter: 3});
+        example2.setNodeAttributes({color: null, diameter: 3});
+        /* Create New Annotator */
         annotator = creatAnnotator(document, ++image_num, example1, example2);
-                                                              
+        /* Lock Next Button on the Last Image */
+        /* Unlock Prev Button on the Second Image */
         if (image_num == 10){
             document.getElementById('next-button').setAttribute('disabled', 'disabled');
         } else if (image_num == 2){
@@ -123,17 +135,18 @@
         }
       });
       
-      /* Set up the Prev button */
+      /* Set up the Prev Button */
       document.getElementById('prev-button').addEventListener('click', function(event) {
-        if (graph_array.length == image_num-1){
-            graph_array.push(deepCopy(graph));
-        } else {
-            graph_array[image_num-1] = deepCopy(graph);
-        }
-        document.getElementById('clear-button').click();
-        
+        /* Save Graph */
+        graphs[image_num-1] = deepCopy(graph);
+        /* Clear Graph */
+        annotator.setNodeAttributes({position: undefined});
+        example1.setNodeAttributes({color: null, diameter: 3});
+        example2.setNodeAttributes({color: null, diameter: 3});
+        /* Create New Annotator */
         annotator = creatAnnotator(document, --image_num, example1, example2);
-
+        /* Lock Prev Button on the First Image */
+        /* Unlock Next Button on the Last Image */
         if (image_num == 1){
             document.getElementById('prev-button').setAttribute('disabled', 'disabled');
         } else if (image_num == 9) {
