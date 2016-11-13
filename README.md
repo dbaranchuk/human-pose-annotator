@@ -18,7 +18,7 @@ Delete the data from ./data and put your images there.
  
 ImageNamesToJSON.py creates data.json with the image names from ./data
 ```
-python3 ImageNamesToJSON.py 
+python ImageNamesToJSON.py 
 ``````
 
 Open index.html in any browser.
