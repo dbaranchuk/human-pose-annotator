@@ -1,9 +1,9 @@
 Human Pose Annotator
 ====================
 
-[Demo](https://rawgit.com/Vernold/js-graph-annotator/master/index.html)
+### [Demo](https://rawgit.com/Vernold/js-graph-annotator/master/index.html)
 
-### Example
+### Example:
 
 ![Example](http://dl1.joxi.net/drive/2016/11/13/0009/2513/641489/89/cdf274f02f.jpg)
 ### Usage:
