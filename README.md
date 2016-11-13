@@ -5,7 +5,7 @@ Human Pose Annotator
 
 ### Example:
 
-![Example](http://dl1.joxi.net/drive/2016/11/13/0009/2513/641489/89/cdf274f02f.jpg)
+![Example](http://joxi.net/n2YRQVdhjY93zA.jpg)
 ### Usage:
 
 ```
