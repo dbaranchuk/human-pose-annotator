@@ -3,74 +3,54 @@
   <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="static/js/graph-annotator.js"></script>
   <script type="text/javascript" src="static/js/definitions.js"></script>
-  <style type="text/css">
-    body {
-      font-family: Verdana, Arial, sans-serif;
-      height: 100%;
-      width: 100%;
-      background: url("static/images/background.jpg");
-      background-size: cover;
-    }
-    .inline-block {
-      display: inline-block;
-      vertical-align: top;
-      white-space: normal;
-    }
-   .button {
-      background-color: #4682B4;
-      border: none;
-      color: white;
-      padding: 8px 17px;
-      font-size: 18px;
-      margin: 0px 4px;
-      cursor: pointer;
-    }
-    .button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-    #message {
-        font-size: 20;
-        color: #4682B0;
-        text-align: left;
-        font-weight: bold;
-    }
-    h1 {
-        font-size: 36;
-        color: #4682B0;
-    }
-    p {
-        font-size: 18;
-        color: #4682B0;
-        text-align: center;
-        font-weight: bold;
-    }
-  </style>
+  <style type="text/css" src="static/css/annotator.css"></style>
 </head>
 <body>
-  <div style="white-space:nowrap;">
-    <div id="annotator" style="margin:25 2.0em;"></div>
-    <div class="inline-block">
-      <h1>Human Pose Annotator</h1>
-      <p id="message" class="message"></p>
-      <div style="white-space:nowrap;">
-        <div class="inline-block" style="margin:5 4.5em;">
-          <!--<p>Front</p>-->
-          <div id="example-front"></div>
+    <ul>
+        <div id="icon"></div>
+        <h1>Human Pose Annotator</h1>
+        <button id="logout-button" class="logout">Log Out</button>
+        <button id="download-button" class="logout">Demo</button>
+    </ul>
+    <div style="white-space:nowrap;">
+        <div class="inline-block">
+            <div style="white-space:nowrap;">
+                <p class="message" style="margin:0 1em;">Example</p>
+
+                <div class="inline-block" style="margin:5 3em;">
+
+                    <p class="message" style="margin:20 0em;">Front</p>
+
+                    <div id="example-front" style="margin:30 0em;"></div>
+                </div>
+                <div class="inline-block" style="margin:5 1.5em;">
+
+                    <p class="message" style="margin:20 2em;">Back</p>
+
+                    <div id="example-back" style="margin:30 2em;"></div>
+                </div>
+            </div>
         </div>
-        <div class="inline-block" style="margin:5 1.5em;">
-          <!--<p>Back</p>-->
-          <div id="example-back"></div>
+        <div class="inline-block">
+            <p id="message" class="message" ></p>
+            <div>
+                <div class="inline-block">
+                    <div>
+                        <button id="clear-button" class="button" style="margin:0.15em 0">C</button>
+                    </div>
+                    <div>
+                        <button id="prev-button" class="button" style="margin:3em 0"><</button>
+                            </div>
+                </div>
+                <div id="annotator" style="margin:15 1.5em;"></div>
+                <div class="inline-block">
+                    <div>
+                        <button id="next-button" class="button" style="margin:3em 0">></button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <p>
-        <button id="clear-button" class="button">Clear</button>
-        <button id="prev-button" class="button" disabled="disabled" style="margin:0 20px;">Prev</button>
-        <button id="next-button" class="button">Next</button>
-        <button id="download-button" class="button" style="margin:0 20px;">Export</button>
-      </p>
     </div>
-  </div>
   <script type="text/javascript">
     var image_num = 0;
     nodeColor = function(which) { return (which == 1) ? [255, 255, 255] : [255, 255, 0];}
@@ -90,7 +70,7 @@
         example2.setNodeAttributes({color: null, diameter: 3});
         example1.setNodeAttributes(0, {color: [255, 0, 0], diameter:5});
         example2.setNodeAttributes(0, {color: [255, 0, 0], diameter:5});
-        document.getElementById('message').innerHTML = '&lt;&lt; Click ' + nodes[0].name;
+        document.getElementById('message').innerHTML = 'Click ' + nodes[0].name;
       });
       
       /* Set up the Export Button */

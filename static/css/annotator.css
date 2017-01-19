@@ -1,0 +1,131 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+}
+.inline-block {
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
+.button{
+    font-size: 40;
+    color:#4387cb;
+    opacity: 0.4;
+    background-color:#fff;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    padding: 0;
+}
+.button:hover {
+    opacity: 1;
+}
+.button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.button:focus {
+    outline: 0;
+}
+p, #message{
+    margin: 0;
+    padding: 7 0px;
+    border-radius: 10px;
+    background-color: #4387cb;
+    font-size: 18;
+    color: #fff;
+    text-align: center;
+    font-weight: none;
+}
+h1 {
+    margin: 10px;
+    float: left;
+    font-size: 32;
+    color: #fff;
+    font-weight: 500;
+}
+.logout{
+    border-radius: 10px;
+    list-style-type: none;
+    margin: 10px 30px 0px 10px;
+    padding: 8;
+    overflow: hidden;
+    background-color: #4387cb;
+    border: none;
+    color: #fff;
+    font-size: 20;
+    float: right;
+    cursor: pointer;
+    font-weight: 500;
+}
+.logout:hover {
+    background-color: #2367ab;
+}
+.logout:focus {
+    outline: 0;
+}
+ul {
+    border-radius: 10px;
+    list-style-type: none;
+    margin: 20;
+    padding: 0;
+    overflow: hidden;
+    background-color: #4387cb;
+}
+
+li {
+    font-size: 18;
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 17px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+#icon{
+    background-image: url({% static 'annotator/images/gml.jpg'%});
+    background-color:#fff;
+    float: left;
+    display: block;
+    margin: 10px;
+    border-radius: 10px;
+    background-size: contain;
+    height:37px;
+    width:60px;
+}
+input[type="number"] {
+    font-size: 18px;
+    border: none;
+    outline: none;
+    width: 45%;
+    font-weight: 500;
+    color: #fff;
+    background-color: #4387cb;
+    margin: 8px 0px 0px 0px;
+    float: left;
+    text-align: right;
+    -moz-appearance: textfield;
+}
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.ul-counter {
+    ul;
+    margin: 0;
+}
+
+#counter {
+    #message;
+    padding: 8 0px;
+    float: left;
+    margin: 0px 0px 0px 6px;
+}

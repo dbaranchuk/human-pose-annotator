@@ -1,38 +1,3 @@
-/* 14 Points */
-/* Pose node definitions */
-// var nodes = [
-//     {name: 'head'},
-//     {name: 'neck'},
-//     {name: 'right shoulder'},
-//     {name: 'right elbow'},
-//     {name: 'right hand'},
-//     {name: 'left shoulder'},
-//     {name: 'left elbow'},
-//     {name: 'left hand'},
-//     {name: 'right hip'},
-//     {name: 'left hip'},
-//     {name: 'right knee'},
-//     {name: 'left knee'},
-//     {name: 'right ankle'},
-//     {name: 'left ankle'}
-// ];
-// var edges = [
-//     {index: [0,1]},
-//     {index: [5,9]},
-//     {index: [9,11]},
-//     {index: [11,13]},
-//     {index: [8,9]},
-//     {index: [2,8]},
-//     {index: [8,10]},
-//     {index: [10,12]},
-//     {index: [1,2]},
-//     {index: [2,3]},
-//     {index: [3,4]},
-//     {index: [1,5]},
-//     {index: [5,6]},
-//     {index: [6,7]}
-// ];
-
 /* 16 Points */
 /* Pose node definitions */
 var nodes = [
@@ -171,7 +136,7 @@ creatAnnotator = function(document, image_num, example1, example2)
         onload: function() {
             var current_node = 0;
             while (graph.nodes[current_node].position !== undefined) current_node++;
-            document.getElementById('message').innerHTML = '&lt;&lt; Click ' + nodes[current_node].name;
+            document.getElementById('message').innerHTML = 'Click ' + nodes[current_node].name;
             example1.setNodeAttributes({color: null, diameter: 3});
             example2.setNodeAttributes({color: null, diameter: 3});
             example1.setNodeAttributes(current_node, {color: [255, 0, 0], diameter: 5});
@@ -198,7 +163,7 @@ creatAnnotator = function(document, image_num, example1, example2)
                 document.getElementById('message').innerHTML = 'Finished';
             } else {
                 // Highlight the next node.
-                document.getElementById('message').innerHTML = '&lt;&lt; Click ' + nodes[nextNode].name;
+                document.getElementById('message').innerHTML = 'Click ' + nodes[nextNode].name;
                 example1.setNodeAttributes(nextNode, {color: [255, 0, 0], diameter: 5});
                 example2.setNodeAttributes(nextNode, {color: [255, 0, 0], diameter: 5});
             }
