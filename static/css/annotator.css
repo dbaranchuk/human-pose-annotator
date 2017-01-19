@@ -44,24 +44,24 @@ h1 {
     color: #fff;
     font-weight: 500;
 }
-.logout{
+.bar-button{
     border-radius: 10px;
     list-style-type: none;
-    margin: 10px 30px 0px 10px;
-    padding: 8;
+    margin: 2px 0px 0px 10px;
+    padding: 12;
     overflow: hidden;
     background-color: #4387cb;
     border: none;
     color: #fff;
-    font-size: 20;
+    font-size: 25;
     float: right;
     cursor: pointer;
     font-weight: 500;
 }
-.logout:hover {
+.bar-button:hover {
     background-color: #2367ab;
 }
-.logout:focus {
+.bar-button:focus {
     outline: 0;
 }
 ul {
@@ -91,7 +91,7 @@ li a:hover {
 }
 
 #icon{
-    background-image: url({% static 'annotator/images/gml.jpg'%});
+    background-image: url("../images/gml.jpg");
     background-color:#fff;
     float: left;
     display: block;
@@ -100,32 +100,4 @@ li a:hover {
     background-size: contain;
     height:37px;
     width:60px;
-}
-input[type="number"] {
-    font-size: 18px;
-    border: none;
-    outline: none;
-    width: 45%;
-    font-weight: 500;
-    color: #fff;
-    background-color: #4387cb;
-    margin: 8px 0px 0px 0px;
-    float: left;
-    text-align: right;
-    -moz-appearance: textfield;
-}
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-.ul-counter {
-    ul;
-    margin: 0;
-}
-
-#counter {
-    #message;
-    padding: 8 0px;
-    float: left;
-    margin: 0px 0px 0px 6px;
 }
