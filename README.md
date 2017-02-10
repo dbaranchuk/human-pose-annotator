@@ -21,9 +21,9 @@ cd human-pose-annotator
     
 Delete the data from ./data and put your images there.
  
-ImageNamesToJSON.py creates data.json that includes the image names from ./data
+image_names_to_json.py creates data.json that includes the image names from ./data
 ```
-python ImageNamesToJSON.py 
+python image_names_to_json.py 
 ``````
 
 Open index.html in any browser.
