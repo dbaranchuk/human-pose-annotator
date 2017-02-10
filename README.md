@@ -22,9 +22,8 @@ python ImageNamesToJSON.py
 ``````
 
 Open index.html in any browser.
-``````
 
 ### Final Version
-Fully functional annotator is hosted [here](http://annotator.pw/pose/)
+The fully functional annotator is hosted [here](http://annotator.pw/pose/)
 
-Today it is available only for logined users, so feel free to contact me (dmitrybaranchuk@gmail.com). I will sign up a staff user so you'll be able to add new users and upload images for them. 
+Today it is available only for logined users, so feel free to contact me (dmitrybaranchuk@gmail.com). I will sign up a staff user for you so you'll be able to add new users and upload images for them. 
