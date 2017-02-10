@@ -1,12 +1,12 @@
 Human Pose Annotator
 ====================
 
-### Final Version
-The fully functional annotator is hosted [here](http://annotator.pw/pose/)
-
-Today it is available only for logined users, so feel free to contact me (dmitrybaranchuk@gmail.com). I will sign up a staff user for you so you'll be able to add new users and upload images for them. 
-
 ### [Demo](https://rawgit.com/Vernold/js-graph-annotator/master/index.html)
+
+### Final Version:
+The fully functional annotator is hosted on http://annotator.pw/pose/
+
+Today it is available only for logined users so feel free to contact me: dmitrybaranchuk@gmail.com. I will sign up a staff user for you and let you add new users and upload images for them.
 
 ### Example:
 
