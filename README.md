@@ -1,7 +1,7 @@
 Human Pose Annotator
 ====================
 
-### [Demo](https://rawgit.com/Vernold/js-graph-annotator/master/index.html)
+### [Demo](https://rawgit.com/dbaranchuk/human-pose-annotator/master/index.html)
 
 ### Final Version:
 The fully functional annotator is hosted on http://annotator.pw/pose/
