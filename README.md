@@ -14,7 +14,7 @@ Today it is available only for logined users so feel free to contact me: dmitryb
 ### Usage:
 
 ```
-git clone https://github.com/Vernold/human-pose-annotator 
+git clone https://github.com/dbaranchuk/human-pose-annotator 
 
 cd human-pose-annotator
 ``````
