@@ -4,7 +4,7 @@ Human Pose Annotator
 ### [Demo](https://rawgit.com/dbaranchuk/human-pose-annotator/master/index.html)
 
 ### Final Version:
-The fully functional annotator is hosted on http://annotator.pw/pose/
+The fully functional annotator is hosted on http://annotator.pw/pose/ (Today hosting is not paid due to non-use)
 
 Today it is available only for logined users so feel free to contact me: dmitrybaranchuk@gmail.com. I will sign up a staff user for you and let you add new users and upload images for them.
 
